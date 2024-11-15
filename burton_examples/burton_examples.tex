@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage[english]{babel}
+
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\linespread{1.5}
+
+\title{Burton Examples}
+\author{Kathryn Hu}
+
+\begin{document}
+\maketitle
+
+\section{Time-Optimal Double Integrator}
+Problem formulation:
+\begin{center}
+    $\displaystyle \min_{\textbf{u},t_f}\int_{0}^{t_f}dt$\\
+    $[\dot x, \dot y] = [y, u],$\\
+    $x(t_f) = y(t_f) = 0, |u|\leq 1$
+\end{center}
+Without fixed $t_f$:
+\begin{center}
+    $\displaystyle \min_{\textbf{u},t_f}\int_{0}^{1}t_fdt$\\
+    $[\dot x, \dot y] = [t_f\cdot y, t_f\cdot u],$\\
+    $x(1) = y(1) = 0, |u|\leq 1$
+\end{center}
+
+\section{Dubins Vehicle}
+Problem formulation:
+\begin{center}
+    $\min_{u,t_f}\int_{0}^{t_f}(1 + \frac{1}{2}[u(t)]^2)dt$\\
+    $[\dot x, \dot y, \dot\theta] = [\cos\theta, \sin\theta, u],$\\
+    $|u|\leq 6, t_f\geq 0, |x(t_f)|^2 + |y(t_f)|^2\leq (0.1)^2$
+\end{center}
+Without fixed $t_f$:
+\begin{center}
+    $\min_{u,t_f}\int_{0}^{1}t_f(1 + \frac{1}{2}[u(t)]^2)d\tau$\\
+    $[\dot x, \dot y, \dot\theta] = [t_f\cdot\cos\theta, t_f\cdot\sin\theta, t_f\cdot u],$\\
+    $|u|\leq 6, t_f\geq 0, |x(1)|^2 + |y(1)^2|\leq (0.1)^2$
+\end{center}
+Discretized:
+\begin{center}
+    $\min_{u,t_f}\sum_{k = 1}^{N - 1}\Delta t(1 + \frac{1}{2}u_i^2)$\\
+    $[x_{k + 1}, y_{k + 1}, \theta_{k + 1}] = [x_k + t_f\cdot\cos{\theta_k}\cdot\Delta\tau, y_k + t_f\cdot\sin{\theta_k}\cdot\Delta\tau, \theta_k + t_f\cdot u_k\cdot\Delta\tau]$\\
+    $|u|\leq 6, t_f\geq 0, x_N^2 + y_N^2\leq (0.1)^2$
+\end{center}
+\end{document}
